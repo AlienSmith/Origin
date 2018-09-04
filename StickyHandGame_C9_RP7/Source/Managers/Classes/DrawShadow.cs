@@ -96,6 +96,7 @@ namespace StickyHandGame_C9_RP7.Source.Components.DynamicLighting
 
             }
         }
+        //start
         public Trace[] OnesideEdgeTrace(Trace ray, Trace line)
         {
             Trace[] shadow = new Trace[2];
