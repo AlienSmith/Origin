@@ -74,7 +74,7 @@ namespace StickyHandGame_C9_RP7.Source.Components.DynamicLighting
                 {
 
                 }
-                else if (hull.Bound.Count%2 == 0)
+                else if (hull.Bound.Count%2 == 0 && hull.Bound.Count != 0)
                 {
                     if (Line[0].StartPoint == Line[1].StartPoint)
                     {

@@ -28,7 +28,12 @@ namespace StickyHandGame_C9_RP7.Source.TestResource
         Vector2 startpoint = PolygongEntity.StartPoint;
         ShadowManager shadowManager;
         public static Vector2 WINDOWSIZE = new Vector2(1000, 1000);
-        public Game1()
+        private static Game1 instance;
+        public static Game1 Instance { get {if(instance == null){
+                    instance = new Game1();
+                }
+                return instance; } }
+        private Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = (int)Game1.WINDOWSIZE.X;
