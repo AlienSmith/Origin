@@ -3,9 +3,12 @@ using Microsoft.Xna.Framework;
 using StickyHandGame_C9_RP7.Source.Engine;
 using StickyHandGame_C9_RP7.Source.Entities.Components;
 using System;
+using System.Collections.Generic;
 
 namespace StickyHandGame_C9_RP7.Source.Entities.Core
 {
+
+
     //
     public struct EntityAttribute
     {
@@ -13,14 +16,14 @@ namespace StickyHandGame_C9_RP7.Source.Entities.Core
         public int Width;
         public int Height;
         public Vector2 Scale;
-        public CollisionLayers collisionLayer;
-        public EntityAttribute(int X, int Y, Vector2 Scale, CollisionLayers cl)
+        public Layers Layer;
+        public EntityAttribute(int X, int Y, Vector2 Scale, Layers cl)
         {
             this.Scale = Scale;
             this.Width = (int)(X * Scale.X);
             this.Height = (int)(Y * Scale.Y);
             this.Origin = new Vector2((X * Scale.X) / 2, (Y * Scale.Y) / 2);
-            this.collisionLayer = cl;
+            this.Layer = cl;
         }
     }
     public struct AnimatedEntityAttribute
@@ -38,11 +41,23 @@ namespace StickyHandGame_C9_RP7.Source.Entities.Core
         }
     }
 
+
+
+
+
+
+
     public abstract class Entity : ICloneable
     {
         public CollisionComponent CollisionComponent { get; set; }
 
-        protected int id = 0;
+        // Anchor stuff
+        public List<Entity> Anchors { get; set; }
+        public bool IsActiveAnchor = false;
+        public float AnchorDistance { get; set; }
+
+
+        public readonly int Id = 0;
         private static int _count = 0;
         public Vector2 Position;
         public float Width;
@@ -51,7 +66,7 @@ namespace StickyHandGame_C9_RP7.Source.Entities.Core
 
         protected Entity()
         {
-            this.id = Entity.GetId();
+            this.Id = Entity.GetId();
             Position = new Vector2(0, 0);
             Width = 0;
             Height = 0;
@@ -66,6 +81,10 @@ namespace StickyHandGame_C9_RP7.Source.Entities.Core
             return ++_count;
         }
 
+        /// <summary>
+        /// When a collision is triggered
+        /// </summary>
+        /// <param name="collided">The collided.</param>
         public abstract void CollisionTriggered(CollisionInfo collided);
 
         public abstract object Clone();

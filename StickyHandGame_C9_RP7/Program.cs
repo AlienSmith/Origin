@@ -1,5 +1,4 @@
-﻿using StickyHandGame_C9_RP7.Source.TestResource;
-using System;
+﻿using System;
 
 namespace StickyHandGame_C9_RP7
 {
@@ -14,7 +13,7 @@ namespace StickyHandGame_C9_RP7
         [STAThread]
         static void Main()
         {
-            using (var game = Game1.Instance)
+            using (var game = new GameManager())
                 game.Run();
         }
     }

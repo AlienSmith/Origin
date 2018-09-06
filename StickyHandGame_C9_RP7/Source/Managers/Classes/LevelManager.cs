@@ -1,67 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
-using StickyHandGame_C9_RP7.Source.Entities.Classes;
-using StickyHandGame_C9_RP7.Source.Entities.Classes.Player;
+using Microsoft.Xna.Framework.Input;
 using StickyHandGame_C9_RP7.Source.Entities.Core;
-using System;
+using StickyHandGame_C9_RP7.Source.Managers.Core;
 using System.Collections.Generic;
-using System.IO;
+using StickyHandGame_C9_RP7.Source.Cameras;
 
 namespace StickyHandGame_C9_RP7.Source.Managers.Classes
 {
-    public class Levels
-    {
-        public string Path { get; private set; }
 
-        public static Levels Level1 = new Levels(Environment.CurrentDirectory + @"..\..\..\..\..\Content\Levels\Test_Map_RPT_Foreground.csv");
-
-        private Levels(string filePath)
-        {
-            this.Path = filePath;
-        }
-    }
-    public enum Tiles
-    {
-        Nothing = -1,
-        Tile_0_C = 0,
-        Tile_1_C = 1,
-        Tile_2_C = 2,
-        Tile_3_C = 3,
-        Tile_4_C_S = 4,
-        Tile_5_C = 5,
-        Tile_6_C = 6,
-        Tile_7_C = 7,
-        Tile_8_C = 8,
-        Tile_9_C = 9,
-        Tile_16_NC = 16,
-        Tile_17_NC = 17,
-        Tile_18_NC = 18,
-        Tile_19_NC = 19,
-        Tile_20_NC = 20,
-        Tile_21_NC = 21,
-        Tile_32_C = 32,
-        Tile_33_C = 33,
-        Tile_34_C = 34,
-        Tile_35_C = 35,
-        Tile_36_C = 36,
-        Tile_37_C = 37,
-        Tile_38_C = 38,
-        Tile_39_C = 39,
-        Tile_48_C = 48,
-        Tile_49_C = 49,
-        Tile_50_C = 50,
-        Tile_51_C = 51,
-        Tile_52_C = 52,
-        Tile_53_C = 53,
-        Tile_54_C = 54,
-        Tile_55_C = 55,
-        Tile_64_NC_W = 64,
-        Tile_65_NC_K = 65,
-        //TC for TriangleCollisions
-        Tile_91_TC_TL = 91,
-        Tile_92_TC_TR = 92,
-        Tile_93_TC_BR = 93,
-        Tile_94_TC_BL = 94
-    }
 
     public class LevelManager
     {
@@ -69,7 +15,6 @@ namespace StickyHandGame_C9_RP7.Source.Managers.Classes
         /// The instance
         /// </summary>
         private static LevelManager _instance;
-        private Dictionary<int, string> fileMappings;
         public static LevelManager Instance
         {
             get
@@ -81,119 +26,197 @@ namespace StickyHandGame_C9_RP7.Source.Managers.Classes
                 return _instance;
             }
         }
-
-        private Vector2 _playerStart;
-
         private LevelManager()
         {
-        }
-
-        public void Update(GameTime gameTime)
-        {
-
-        }
-
-
-        public void LoadLevel(Levels level)
-        {
-
+            _currentLevel = Level.Start();
+            this.CurrentCamera = new Camera(GameManager.Instance.GraphicsDevice.Viewport, CameraType.Screen);
         }
 
         /// <summary>
-        /// Builds the level off of CSV file.
+        /// The current level
         /// </summary>
-        /// <param name="filePath">The file path.</param>
-        /// <returns></returns>
-        public List<Entity> BuildLevelOffOfCSVFile(string filePath)
-        {
-            List<List<Tiles>> tileGrid = new List<List<Tiles>>();
-            using (StreamReader reader = File.OpenText(filePath))
-            {
-                string currentLine;
+        private Level _currentLevel;
 
-                while ((currentLine = reader.ReadLine()) != null)
-                {
-                    List<Tiles> currentRow = new List<Tiles>();
-                    string[] columns = currentLine.Split(',');
-                    foreach (string cell in columns)
+        public Camera CurrentCamera { get; private set; }
+
+        private KeyboardState _previousState;
+        private KeyboardState _currentState;
+
+        /// <summary>
+        /// Level Update
+        ///
+        /// TODO ON SWITCHING LEVELS NEED TO UNLOAD RESOURCES
+        /// </summary>
+        /// <param name="gameTime">The game time.</param>
+        public void LevelUpdate(GameTime gameTime)
+        {
+            if (_currentState != null)
+                _previousState = _currentState;
+            else
+                _previousState = Keyboard.GetState();
+            _currentState = Keyboard.GetState();
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                GameManager.Instance.Exit();
+
+            switch (_currentLevel.Enum)
+            {
+                case LevelEnum.Start:
                     {
-                        Tiles tile = (Tiles)int.Parse(cell.Trim());
-                        currentRow.Add(tile);
+                        if (_currentState.IsKeyUp(Keys.Enter) && _previousState.IsKeyDown(Keys.Enter))
+                        {
+                            NextLevel();
+                        }
+                        break;
                     }
-                    tileGrid.Add(currentRow);
-                }
-            }
+                case LevelEnum.Credits:
+                    {
+                        if (_currentState.IsKeyUp(Keys.Enter) && _previousState.IsKeyDown(Keys.Enter))
+                            NextLevel();
+                        break;
+                    }
+                default:
+                    {
+                        if (_currentState.IsKeyDown(Keys.OemTilde))
+                            SwitchToLevel(LevelEnum.Start);
 
-            return GenerateLevel(tileGrid);
+                        if (_currentState.IsKeyDown(Keys.D1))
+                            SwitchToLevel(LevelEnum.Level1);
+
+                        if (_currentState.IsKeyDown(Keys.D2))
+                            SwitchToLevel(LevelEnum.Level2);
+
+                        if (_currentState.IsKeyDown(Keys.D3))
+                            SwitchToLevel(LevelEnum.Credits);
+
+                        _currentLevel.Update(gameTime);
+                        break;
+                    }
+            }
+            CurrentCamera.UpdateCamera(GameManager.Instance.GraphicsDevice.Viewport);
+        }
+
+        public void LevelDraw(GameTime gameTime)
+        {
+            _currentLevel.Draw(gameTime);
+        }
+
+
+        /// <summary>
+        /// Switches to level.
+        /// </summary>
+        /// <param name="level">The level.</param>
+        private void SwitchToLevel(LevelEnum level)
+        {
+            switch (level)
+            {
+                case LevelEnum.Start:
+                    this.CurrentCamera = new Camera(GameManager.Instance.GraphicsDevice.Viewport, CameraType.Screen);
+                    _currentLevel = Level.Start();
+                    break;
+                case LevelEnum.Level1:
+                    this.CurrentCamera = new Camera(GameManager.Instance.GraphicsDevice.Viewport, CameraType.Follow);
+                    _currentLevel = Level.Level_1();
+                    break;
+                case LevelEnum.Level2:
+                    this.CurrentCamera = new Camera(GameManager.Instance.GraphicsDevice.Viewport, CameraType.Follow);
+                    _currentLevel = Level.Level_2();
+                    break;
+                case LevelEnum.Credits:
+                    this.CurrentCamera = new Camera(GameManager.Instance.GraphicsDevice.Viewport, CameraType.Screen);
+                    _currentLevel = Level.Credits();
+                    break;
+            }
+        }
+
+
+        #region Public accessors and Triggers        
+
+        /// <summary>
+        /// Go to next level
+        /// </summary>
+        public void NextLevel()
+        {
+            switch (_currentLevel.Enum)
+            {
+                case LevelEnum.Start:
+                    SwitchToLevel(LevelEnum.Level1);
+                    break;
+                case LevelEnum.Level1:
+                    SwitchToLevel(LevelEnum.Level2);
+                    break;
+                case LevelEnum.Level2:
+                    SwitchToLevel(LevelEnum.Credits);
+                    break;
+                case LevelEnum.Credits:
+                    SwitchToLevel(LevelEnum.Start);
+                    break;
+            }
         }
 
         /// <summary>
-        /// Generates the level.
+        /// Triggers the credits.
         /// </summary>
-        /// <param name="tiles">The tiles.</param>
-        /// <returns></returns>
-        public List<Entity> GenerateLevel(List<List<Tiles>> tiles)
+        public void TriggerCredits()
         {
-            List<Entity> entities = new List<Entity>();
-
-            for (int r = 0; r < tiles.Count; r++)
-            {
-                List<Tiles> column = tiles[r];
-                for (int c = 0; c < column.Count; c++)
-                {
-                    Tiles tile = column[c];
-                    Entity entity = SpawnTile((c + 1) * 32 - 16, (r + 1) * 32 - 16, tile);
-                    if (entity != null)
-                        entities.Add(entity);
-                }
-            }
-            return entities;
+            SwitchToLevel(LevelEnum.Credits);
         }
 
         /// <summary>
-        /// Spawns the tile.
+        /// Restarts the game.
         /// </summary>
-        /// <param name="rowIndex">The rowIndex.</param>
-        /// <param name="colIndex">The colIndex.</param>
-        /// <param name="tile">The tile.</param>
-        /// <returns></returns>
-        private Entity SpawnTile(float x, float y, Tiles tile)
+        public void RestartGame()
         {
-            Vector2 origin = new Vector2(x, y);
+            SwitchToLevel(LevelEnum.Start);
+        }
 
-            string tileName = tile.ToString();
-            if (tileName.Contains("C"))
-            {
-                if (tileName.Contains("S"))
-                {
-                    _playerStart = new Vector2(x, y - 34);
-                    GameManager.Instance.PlayerEntity = new PlayerEntity { Position = _playerStart };
-                }
-                else if (tileName.Contains("NC"))
-                {
-                    if (tileName.Contains("W"))
-                        return new TriggerEntity(tileName, origin, TriggerEntity.TriggerType.Restart);
-                    else if (tileName.Contains("K"))
-                        return new TriggerEntity(tileName, origin, TriggerEntity.TriggerType.Victory, true);
-                    else
-                        return new EmptyEntity(tileName, origin);
-                }
-                return new PlatformEntity(tileName, origin);
-            }
+        /// <summary>
+        /// Gets the current physical world for the physics/collision system.
+        /// </summary>
+        /// <returns></returns>
+        public List<Entity> GetCurrentPhysicalLevel()
+        {
+            return _currentLevel.ForegroundEntities;
+        }
 
-            return null;
+
+        /// <summary>
+        /// Gets the current player in level.
+        /// </summary>
+        /// <returns></returns>
+        public Entity GetCurrentPlayerInLevel()
+        {
+            return _currentLevel.PlayerEntity;
         }
 
         /// <summary>
         /// Resets the player position.
         /// </summary>
-        public void ResetPlayerPosition()
+        public void ResetCurrentPlayerPosition()
         {
-            Entity player = GameManager.Instance.PlayerEntity;
-            player.Position = _playerStart;
-            player.Reset();
+            _currentLevel.MovePlayerToStartPosition();
         }
+
+        /// <summary>
+        /// Spawns the temporary entity.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="entity">The entity.</param>
+        public void SpawnTempEntity(int id, Entity entity)
+        {
+            _currentLevel.TempEntities.Add(id, entity);
+        }
+
+        /// <summary>
+        /// Destroys the temporary entity.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        public void DestroyTempEntity(Entity entity)
+        {
+            _currentLevel.ToDelete.Add(entity);
+        }
+
+        #endregion
 
     }
 }
-

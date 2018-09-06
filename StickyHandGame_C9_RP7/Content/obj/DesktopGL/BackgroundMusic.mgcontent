@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/BackgroundMusic.mp3</SourceFile>
+  <SourceTime>2018-09-05T15:38:00.1347431-06:00</SourceTime>
+  <DestFile>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/bin/DesktopGL/BackgroundMusic.xnb</DestFile>
+  <DestTime>2018-09-05T15:38:19.8859298-06:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2017-03-01T08:05:36-07:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2017-03-01T08:05:36-07:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/bin/DesktopGL/BackgroundMusic.ogg</string>
+  </BuildOutput>
+</PipelineBuildEvent>

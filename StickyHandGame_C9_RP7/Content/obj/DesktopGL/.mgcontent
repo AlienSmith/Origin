@@ -7,7 +7,6 @@
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Idle.png</File>
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Chain.png</File>
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Character_Hand_Down.png</File>
-    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Character_Hand_Reach.png</File>
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_0_C.png</File>
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_1_C.png</File>
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_2_C.png</File>
@@ -20,14 +19,6 @@
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_19_NC.png</File>
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_20_NC.png</File>
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_21_NC.png</File>
-    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_32_C.png</File>
-    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_33_C.png</File>
-    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_34_C.png</File>
-    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_35_C.png</File>
-    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_36_C.png</File>
-    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_37_C.png</File>
-    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_38_C.png</File>
-    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_39_C.png</File>
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_48_C.png</File>
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_49_C.png</File>
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_50_C.png</File>
@@ -40,7 +31,25 @@
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Main.spritefont</File>
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_4_C_E.png</File>
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_65_NC_K.png</File>
-    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/BackGround.mp3</File>
     <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Shoot.wav</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_33_TC_TR.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_81_NC_V.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/BackgroundMusic.mp3</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/BackBackground/Background.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/BackBackground/Credits.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_80_C_G.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/BackBackground/TitleScreen.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Character_Hand_Open.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Character_Grapple_InAir.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Character_Body_NoArms.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Effects_Dust_Ground.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Effects_Ground_Grass.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_32_TC_TL.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_34_TC_BL.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_35_TC_BR.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_36_TC_TL.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_37_TC_TR.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_38_TC_BL.png</File>
+    <File>C:/Users/u1217369/Documents/Cohort9_Team7_Rapid1/StickyHandGame_C9_RP7/StickyHandGame_C9_RP7/Content/Tile_39_TC_BR.png</File>
   </SourceFiles>
 </SourceFileCollection>

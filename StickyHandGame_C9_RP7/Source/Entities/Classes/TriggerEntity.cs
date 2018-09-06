@@ -10,27 +10,20 @@ namespace StickyHandGame_C9_RP7.Source.Entities.Classes
 {
     public class TriggerEntity : Entity
     {
-        public enum TriggerType
-        {
-            Restart,
-            Victory
-        }
-
-
         private bool _isAnimation;
         public RenderComponent renderComponent;
         public AnimationComponent animationComponent;
-        private TriggerType _type;
+        private bool _alreadyTriggered = false;
 
-        public TriggerEntity(string tileName, Vector2 position, TriggerType type, bool isAnimation = false) : base()
+        public TriggerEntity(string tileName, Vector2 position, Tags type, bool isAnimation = false) : base()
         {
             this._isAnimation = isAnimation;
             if (isAnimation)
             {
-                animationComponent = new AnimationComponent("Tile_65_NC_K", this,
+                animationComponent = new AnimationComponent(tileName, this,
                     new int[] { 6 },
                     new int[] { 60 },
-                    new string[] { "Tile_65_NC_K" },
+                    new string[] { tileName },
                     32
                     , 32
                     , new Vector2(1, 1));
@@ -48,10 +41,10 @@ namespace StickyHandGame_C9_RP7.Source.Entities.Classes
             Width = 32;
             Height = 32;
 
-            this._type = type;
             _isAnimation = isAnimation;
+            _alreadyTriggered = false;
 
-            this.CollisionComponent = new BoxColliderComponent(this, Width, Height, CollisionLayers.Trigger);
+            this.CollisionComponent = new BoxColliderComponent(this, Width, Height, Layers.Static, type);
         }
 
         public override void UnloadContent()
@@ -72,7 +65,7 @@ namespace StickyHandGame_C9_RP7.Source.Entities.Classes
                 if (this._isAnimation)
                     this.animationComponent.Draw(gameTime);
                 else
-                    this.renderComponent.Draw(gameTime);
+                    this.renderComponent.Draw(gameTime, Color.White);
             }
 
         }
@@ -84,10 +77,20 @@ namespace StickyHandGame_C9_RP7.Source.Entities.Classes
 
         public override void CollisionTriggered(CollisionInfo collided)
         {
-            if (this._type == TriggerType.Restart && collided.CollisionComponent.Layer == CollisionLayers.Player)
-                LevelManager.Instance.ResetPlayerPosition();
-            if (this._type == TriggerType.Victory && collided.CollisionComponent.Layer == CollisionLayers.Player)
-                GameManager.Instance.RestartGame();
+            if (!_alreadyTriggered)
+            {
+                if (this.CollisionComponent.Tag == Tags.Hazard && collided.CollisionComponent.Tag == Tags.Player)
+                {
+                    LevelManager.Instance.ResetCurrentPlayerPosition();
+                    _alreadyTriggered = true;
+                }
+                else if (this.CollisionComponent.Tag == Tags.Goal && collided.CollisionComponent.Tag == Tags.Player)
+                {
+                    LevelManager.Instance.NextLevel();
+                    _alreadyTriggered = true;
+                }
+            }
+
         }
 
         public override object Clone()
